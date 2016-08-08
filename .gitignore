@@ -1,3 +1,5 @@
 allure-service/target/
 .idea/
 *.iml
+allure-web/target/
+logs/
