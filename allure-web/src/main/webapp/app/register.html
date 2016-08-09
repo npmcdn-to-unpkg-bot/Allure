@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="lib/angular-loading-bar/build/loading-bar.min.css">
     <link rel="stylesheet" href="lib/angular-toastr/dist/angular-toastr.min.css">
     <link rel="stylesheet" href="lib/angular-ui-select/dist/select.min.css">
-    <link rel="stylesheet" href="register.css">
+    <link rel="stylesheet" href="css/register.css">
 
     <script src="lib/jquery/dist/jquery.min.js"></script>
     <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -21,19 +21,10 @@
     <script src="lib/angular-cookies/angular-cookies.min.js"></script>
     <script src="lib/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script src="lib/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-    <script src="lib/ng-file-upload/ng-file-upload.min.js"></script>
     <script src="lib/angular-loading-bar/build/loading-bar.min.js"></script>
     <script src="lib/angular-toastr/dist/angular-toastr.tpls.min.js"></script>
     <script src="lib/angular-ui-select/dist/select.min.js"></script>
 
-    <script src="common/zeal.common.module.js"></script>
-    <script src="common/services/cookie.service.js"></script>
-    <script src="common/interceptors/http.interceptor.js"></script>
-    <script src="common/services/http.service.js"></script>
-    <script src="common/services/message.service.js"></script>
-    <script src="common/filters/text.truncate.filter.js"></script>
-    <script src="common/services/userinfo.service.js"></script>
-    <script src="register.js"></script>
 </head>
 <body ng-controller="RegisterController">
 <div class="container">
@@ -133,7 +124,8 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <button ng-disabled="!form.$dirty || form.$invalid || user.repassword != user.password" type="submit"
+                        <button ng-disabled="!form.$dirty || form.$invalid || user.repassword != user.password"
+                                type="submit"
                                 class="btn btn-block btn-action" ng-click="submit()">注册
                         </button>
                     </div>

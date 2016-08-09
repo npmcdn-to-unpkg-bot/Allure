@@ -3,6 +3,6 @@
  */
 (function () {
     angular.module('global').service('ConfigService', function () {
-        this.allureServer = 'http:localhost:8080/allure-service';
+        this.allureServer = '/allure-service';
     });
 })();

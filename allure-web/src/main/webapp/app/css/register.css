@@ -1,6 +1,6 @@
 body {
     font-family: "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    background: #1c2a42 url("icons/bg_header.jpg") no-repeat;
+    background: #1c2a42 url("../icons/bg_header.jpg") no-repeat;
     background-size: cover;
     background-attachment: fixed;
 }

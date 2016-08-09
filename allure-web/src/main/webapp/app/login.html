@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="lib/angular-loading-bar/build/loading-bar.min.css">
     <link rel="stylesheet" href="lib/angular-toastr/dist/angular-toastr.min.css">
     <link rel="stylesheet" href="lib/angular-ui-select/dist/select.min.css">
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="css/login.css">
 
     <script src="lib/jquery/dist/jquery.min.js"></script>
     <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -21,24 +21,25 @@
     <script src="lib/angular-cookies/angular-cookies.min.js"></script>
     <script src="lib/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script src="lib/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-    <script src="lib/ng-file-upload/ng-file-upload.min.js"></script>
     <script src="lib/angular-loading-bar/build/loading-bar.min.js"></script>
     <script src="lib/angular-toastr/dist/angular-toastr.tpls.min.js"></script>
     <script src="lib/angular-ui-select/dist/select.min.js"></script>
 
-    <script src="common/zeal.common.module.js"></script>
-    <script src="common/services/cookie.service.js"></script>
-    <script src="common/interceptors/http.interceptor.js"></script>
-    <script src="common/services/http.service.js"></script>
-    <script src="common/services/message.service.js"></script>
-    <script src="common/filters/text.truncate.filter.js"></script>
-    <script src="common/services/userinfo.service.js"></script>
-    <script src="login.js"></script>
+    <script src="../global/global.js"></script>
+    <script src="../global/service/config-service.js"></script>
+    <script src="../global/service/http-service.js"></script>
+    <script src="../global/service/message-service.js"></script>
+    <script src="../global/service/cookie-service.js"></script>
+    <script src="../global/service/session-service.js"></script>
+    <script src="../global/service/account-service.js"></script>
+    <script src="../global/service/album-service.js"></script>
+    <script src="../global/service/tag-service.js"></script>
+    <script src="app.js"></script>
+    <script src="login/login-controller.js"></script>
+
 </head>
 <body ng-controller="LoginController">
 <div class="container">
-
-
     <section class="section-login">
         <p class="text-center">
             <a href="index.html">
@@ -56,32 +57,32 @@
 
                         <form name="form" novalidate="novalidate" autocomplete="off">
                             <div class="form-group has-feedback"
-                                 ng-class="{'has-error':form.loginName.$dirty && !form.loginName.$valid}">
+                                 ng-class="{'has-error': !form.email.$valid && submitted}">
                                 <div class="input-group">
                                     <span class="input-group-addon">
                                         <i class="fa fa-user"></i>
                                     </span>
-                                    <input type="text" name="loginName" required ng-change="loginNameChange()"
-                                           ng-model="request.loginName" class="form-control" id="loginName"
-                                           placeholder="手机号/邮箱">
+                                    <input type="text" name="email" required ng-change="request.password = ''"
+                                           ng-model="request.email" class="form-control" id="email"
+                                           placeholder="请输入邮箱">
                                 </div>
-                                <p class="help-block  text-right" ng-show="form.loginName.$dirty && form.loginName.$error.required">
-                                    请输入手机号或者邮箱</p>
+                                <p class="help-block  text-right"
+                                   ng-show="form.email.$error.required  && submitted">
+                                    请输入登录邮箱</p>
                             </div>
                             <div class="form-group has-feedback"
-                                 ng-class="{'has-error':form.password.$dirty && !form.password.$valid}">
+                                 ng-class="{'has-error':!form.password.$valid && submitted}">
                                 <div class="input-group">
                                     <span class="input-group-addon">
                                           <i class="fa fa-lock"></i>
                                     </span>
                                     <input type="password" name="password" required
                                            ng-model="request.password" class="form-control"
-                                           ng-change="user.repassword = ''"
                                            id="password" placeholder="请输入密码">
                                 </div>
                                 <p class="help-block text-right"
-                                   ng-show="form.password.$dirty && form.password.$error.required">
-                                    密码是必填项</p>
+                                   ng-show="form.password.$error.required  && submitted">
+                                    请输入密码</p>
                             </div>
                             <div class="form-group text-right">
                                 <div class="checkbox">
@@ -91,7 +92,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <button ng-disabled="form.$invalid" type="submit" class="btn btn-block btn-action"
+                                <button type="submit" class="btn btn-block btn-action"
                                         ng-click="submit()">登 录
                                 </button>
                             </div>

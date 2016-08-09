@@ -15,4 +15,6 @@ public interface AccountService {
     void update(long accountId, UpdateRequest updateRequest);
 
     Account login(LoginRequest request);
+
+    Account findById(long id);
 }

@@ -2,6 +2,7 @@ package com.allure.controller;
 
 import com.allure.config.UserService;
 import com.allure.http.ApiResponse;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -25,7 +26,14 @@ public class AbstractBaseController {
 
 
     protected long getAccountId() {
-        return ((UserService.LoggedUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null) {
+            Object principal = authentication.getPrincipal();
+            if (principal != null && principal instanceof UserService.LoggedUser) {
+                return ((UserService.LoggedUser) principal).getId();
+            }
+        }
+        return -1;
     }
 
 

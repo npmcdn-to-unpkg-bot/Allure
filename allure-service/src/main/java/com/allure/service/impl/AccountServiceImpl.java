@@ -63,4 +63,9 @@ public class AccountServiceImpl implements AccountService {
     public Account login(LoginRequest request) {
         return accountRepository.findByEmailIgnoreCaseAndPassword(request.getEmail(), StringUtils.toMD5(request.getPassword()));
     }
+
+    @Override
+    public Account findById(long id) {
+        return accountRepository.findOne(id);
+    }
 }

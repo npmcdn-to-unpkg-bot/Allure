@@ -5,8 +5,9 @@
  * Created by yang_shoulai on 2016/6/25.
  */
 (function () {
-    angular.module('global').service('HttpService', ['$q', '$injector', '$http', 'SessionService',
-        function ($q, $injector, $http, SessionService) {
+    angular.module('global').service('HttpService', ['$q', '$injector', '$http', 'SessionService', 'MessageService',
+        function ($q, $injector, $http, SessionService, MessageService) {
+            var toastr = MessageService.toast;
             this.http = function (params) {
                 var defer = $q.defer();
                 $http(params).success(function (data) {
@@ -24,7 +25,7 @@
                                 message = message + error.message + "\n";
                             });
                         }
-                        toastr.error(message);
+                        // toastr.error(message);
                         defer.reject({globalErrors: data.globalErrors, filedErrors: data.filedErrors});
                     }
                 }).error(function (data, header, config, status) {
@@ -45,8 +46,10 @@
                         toastr.error('不支持的媒体类型');
                     } else if (status == 405) {
                         toastr.error('不被支持的HTTP方法');
+                    } else {
+                        toastr.error('HTTP请求出错，状态码' + status);
                     }
-                    defer.reject(data, header, config, status);
+                    //defer.reject(data, header, config, status);
                 });
 
                 return {

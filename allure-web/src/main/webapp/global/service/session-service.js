@@ -10,6 +10,8 @@
             if (user != null) {
                 _User = user;
                 $rootScope.$broadcast('session-on', user);
+            } else {
+                this.invalid();
             }
 
         };

@@ -15,7 +15,7 @@
                 return HttpService.http({
                     url: ConfigService.allureServer + '/login',
                     method: 'POST',
-                    params: 'email=' + email + '&password=' + password,
+                    params: {email: email, password: password},
                     headers: {
                         'Content-Type': 'x-www-form-urlencoded'
                     }
@@ -72,6 +72,15 @@
                 });
             };
 
-
+            /**
+             * 重新加载用户的登录信息
+             * @returns {{promise, success, error}|*}
+             */
+            this.reload = function () {
+                return HttpService.http({
+                    url: ConfigService.allureServer + '/accounts/reload',
+                    method: 'GET'
+                });
+            };
         }]);
 })();

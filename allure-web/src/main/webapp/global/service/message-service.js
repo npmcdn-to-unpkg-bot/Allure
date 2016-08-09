@@ -1,5 +1,5 @@
 (function () {
-    angular.module('global').service('MessageService', ['$rootScope', function (toastr) {
+    angular.module('global').service('MessageService', ['toastr', function (toastr) {
         this.toast = {};
         this.toast.info = function (message, title) {
             if (!title) {

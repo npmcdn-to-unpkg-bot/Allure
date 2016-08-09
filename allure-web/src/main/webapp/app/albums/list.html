@@ -1,0 +1,31 @@
+<div>
+    <ul class="nav nav-pills">
+        <li ng-repeat="tag in tags" role="presentation" ng-class="{'active':tag.id == pagination.tagId}">
+            <a role="button" ng-click="clickTag(tag)">{{tag.name}}</a>
+        </li>
+    </ul>
+    <ul class="list-inline  text-center">
+        <li class="col-lg-3 col-md-4 col-sm-6 col-xs-12" ng-repeat="album in albums">
+            <div class="album-item-container">
+                <img ng-src="{{album.photos[0].src}}">
+                <div class="container-fluid">
+                    <div class="row album-label">
+                        <div class="col-md-6 text-left">
+                            <span class="text-muted">{{album.name}}</span>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <span title="收藏数">
+                                <i class="glyphicon glyphicon-heart text-right">{{album.collectionRecordsCount}}</i>
+                            </span>
+                        </div>
+                        <div class="col-md-3 text-center">
+                             <span title="喜欢数">
+                                <i class="glyphicon glyphicon-thumbs-up">{{album.likeRecordsCount}}</i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>

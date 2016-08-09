@@ -61,16 +61,19 @@ body {
     transform: scale(1.1);
 }
 
+.album-item-container {
+    padding: 10px;
+}
+
 .album-label {
     text-overflow: ellipsis;
     overflow: hidden;
     display: block;
-    height: 18px;
-    line-height: 18px;
-    font-size: 12px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    margin-left: 5px;
+    height: 26px;
+    line-height: 26px;
+    font-size: 14px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .footer {
@@ -349,7 +352,6 @@ body {
 }
 
 /*album list tpl end*/
-
 
 .album {
     border: 1px solid #edeff2;
