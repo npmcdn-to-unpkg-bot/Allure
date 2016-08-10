@@ -4,22 +4,25 @@
 
 (function () {
     angular.module('app').controller('AlbumsListController', [
-        '$scope', 'tags', 'AlbumService', 'MessageService',
-        function ($scope, tags, AlbumService, MessageService) {
+        '$scope', 'tags', 'AlbumService', 'MessageService', '$state',
+        function ($scope, tags, AlbumService, MessageService, $state) {
             $scope.tags = tags;
             $scope.albums = [];
-            var pagination = $scope.pagination = {
-                page: 0,
+            $scope.pagination = {
+                page: 1,
                 pageSize: 24,
-                tagId: tags[0].id,
+                tag: null,
                 maxSize: 0
             };
 
             var getAlbums = function () {
-                AlbumService.list(pagination.tagId, pagination.page, pagination.pageSize)
+                AlbumService.list($scope.pagination.tag.id, $scope.pagination.page - 1, $scope.pagination.pageSize)
                     .success(function (page) {
-                        pagination.maxSize = page.totalElements;
+                        $scope.pagination.maxSize = page.totalElements;
                         $scope.albums = page.content;
+                        angular.forEach($scope.albums, function (album) {
+                            album.photos[0].src = 'http://tnfs.tngou.net/image/ext/160803/1c80ec19164a9ccfded52af97703cdb7.jpg';
+                        });
 
                     }).error(function (globalErrors, fieldErrors) {
                     MessageService.toast.error('获取相册列表失败');
@@ -27,14 +30,79 @@
             };
 
             $scope.clickTag = function (tag) {
-                pagination.maxSize = 0;
-                pagination.page = 0;
-                pagination.tagId = tag.id;
+                $scope.pagination.maxSize = 0;
+                $scope.pagination.page = 1;
+                $scope.pagination.tag = tag;
+                $state.current.title = tag.name;
                 getAlbums();
             };
 
-            getAlbums();
+            $scope.onPageChanged = function () {
+                getAlbums();
+            };
+
+            $scope.clickTag(tags[0]);
+        }]);
 
 
+    angular.module('app').controller('AlbumsDetailController', ['$scope', 'album', 'AlbumService', '$state', 'MessageService',
+        function ($scope, album, AlbumService, $state, MessageService) {
+            $scope.album = album;
+
+            angular.forEach(album.photos, function (photo) {
+                photo.src = 'http://tnfs.tngou.net/image/ext/160803/1c80ec19164a9ccfded52af97703cdb7.jpg';
+            });
+
+            $state.current.title = album.name;
+            $scope.liked = false;
+            $scope.collected = false;
+            AlbumService.liked(album.id)
+                .success(function (liked) {
+                    $scope.liked = liked;
+                });
+            AlbumService.collected(album.id)
+                .success(function (collected) {
+                    $scope.collected = collected;
+                });
+
+            $scope.toggleLike = function () {
+                if ($scope.liked) {
+                    AlbumService.cancelLike(album.id)
+                        .success(function () {
+                            $scope.liked = false;
+                            $scope.album.likeRecordsCount--;
+                        }).error(function () {
+                        MessageService.toast.error('取消喜欢失败');
+                    });
+                } else {
+                    AlbumService.like(album.id)
+                        .success(function () {
+                            $scope.liked = true;
+                            $scope.album.likeRecordsCount++;
+                        }).error(function () {
+                        MessageService.toast.error('喜欢该相册失败');
+                    });
+                }
+            };
+
+            $scope.toggleCollect = function () {
+                if ($scope.collected) {
+                    AlbumService.cancelCollect(album.id)
+                        .success(function () {
+                            $scope.collected = false;
+                            $scope.album.collectionRecordsCount--;
+                        }).error(function () {
+                        MessageService.toast.error('取消收藏失败');
+                    });
+                } else {
+                    AlbumService.collect(album.id)
+                        .success(function () {
+                            $scope.collected = true;
+                            $scope.album.collectionRecordsCount++;
+                        }).error(function () {
+                        MessageService.toast.error('收藏失败');
+                    });
+                }
+            };
         }]);
 })();

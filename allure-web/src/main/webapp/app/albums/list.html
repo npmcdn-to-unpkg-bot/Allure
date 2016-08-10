@@ -1,24 +1,24 @@
-<div>
+<div class="container-fluid">
     <ul class="nav nav-pills">
-        <li ng-repeat="tag in tags" role="presentation" ng-class="{'active':tag.id == pagination.tagId}">
+        <li ng-repeat="tag in tags" role="presentation" ng-class="{'active':tag.id == pagination.tag.id}">
             <a role="button" ng-click="clickTag(tag)">{{tag.name}}</a>
         </li>
     </ul>
     <ul class="list-inline  text-center">
-        <li class="col-lg-3 col-md-4 col-sm-6 col-xs-12" ng-repeat="album in albums">
-            <div class="album-item-container">
-                <img ng-src="{{album.photos[0].src}}">
+        <li class="col-lg-2 col-md-4 col-sm-6 col-xs-12" ng-repeat="album in albums">
+            <div class="album-item-container bg-info">
+                <a ng-href="#albums/{{album.id}}" target="_blank"><img ng-src="{{album.photos[0].src}}"></a>
                 <div class="container-fluid">
-                    <div class="row album-label">
-                        <div class="col-md-6 text-left">
-                            <span class="text-muted">{{album.name}}</span>
+                    <div class="row">
+                        <div class="col-lg-7 col-md-8 col-sm-8 col-xs-9 text-left" style="padding-left: 0px;">
+                            <span class="text-muted album-label">{{album.name}}</span>
                         </div>
-                        <div class="col-md-3 text-center">
-                            <span title="收藏数">
-                                <i class="glyphicon glyphicon-heart text-right">{{album.collectionRecordsCount}}</i>
+                        <div class="col-lg-5 col-md-4 col-sm-4 col-xs-3 text-right album-label"
+                             style="padding-left: 0px;padding-right: 0px;">
+                             <span title="收藏数">
+                                <i class="glyphicon glyphicon-heart">{{album.collectionRecordsCount}}</i>
                             </span>
-                        </div>
-                        <div class="col-md-3 text-center">
+                            &nbsp;
                              <span title="喜欢数">
                                 <i class="glyphicon glyphicon-thumbs-up">{{album.likeRecordsCount}}</i>
                             </span>
@@ -28,4 +28,11 @@
             </div>
         </li>
     </ul>
+    <div ng-hide="pagination.maxSize <= 0" style="clear: both;" class="text-center">
+        <uib-pagination total-items="pagination.maxSize" ng-model="pagination.page"
+                        ng-change="onPageChanged()" first-text="第一页"
+                        last-text="最后一页" next-text="下一页" previous-text="上一页" max-size="10" boundary-links="true"
+                        boundary-link-numbers="true"
+                        items-per-page="pagination.pageSize"></uib-pagination>
+    </div>
 </div>

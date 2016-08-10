@@ -11,6 +11,8 @@ public interface AlbumService {
 
     Page<AlbumVO> list(Pageable pageable, long tagId);
 
+    AlbumVO findById(long id);
+
     void delete(long id);
 
     void likeAlbum(long likerId, long albumId);

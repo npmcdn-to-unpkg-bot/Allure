@@ -28,12 +28,12 @@
                         // toastr.error(message);
                         defer.reject({globalErrors: data.globalErrors, filedErrors: data.filedErrors});
                     }
-                }).error(function (data, header, config, status) {
+                }).error(function (data, status, config, header) {
                     if (status == 401) {
                         SessionService.invalid();
                         toastr.error('用户未登陆或者会话过期');
                     } else if (status == 403) {
-                        toastr.error('没有权限执行此操作');
+                        toastr.error('您没有登录或者没有权限执行此操作');
                     } else if (status == 500) {
                         toastr.error('服务器异常');
                     } else if (status == 404) {

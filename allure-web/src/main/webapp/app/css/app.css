@@ -3,6 +3,11 @@ body {
     padding-top: 70px;
 }
 
+.toastr {
+    top: 70px;
+    z-index: 99999;
+}
+
 .text-red {
     color: #ff0000;
 }
@@ -62,18 +67,26 @@ body {
 }
 
 .album-item-container {
-    padding: 10px;
+    padding: 8px;
+    border: 1px solid #edeff2;
+    color: #777;
+    font-size: 11px;
+    margin: 10px 5px 5px 5px;
+    border-radius: 8px;
+}
+
+.album-item-container img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 8px;
 }
 
 .album-label {
     text-overflow: ellipsis;
     overflow: hidden;
     display: block;
-    height: 26px;
-    line-height: 26px;
-    font-size: 14px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    height: 20px;
+    line-height: 20px;
 }
 
 .footer {

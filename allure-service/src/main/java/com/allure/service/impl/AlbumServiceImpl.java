@@ -57,6 +57,13 @@ public class AlbumServiceImpl implements AlbumService {
         return page;
     }
 
+    @Override
+    public AlbumVO findById(long id) {
+        Album album = albumRepository.findOne(id);
+        if (album == null) throw new BusinessException("album does not exist!");
+        return convert(album);
+    }
+
     @Transactional
     @Override
     public void delete(long id) {

@@ -1,6 +1,7 @@
 package com.allure.controller;
 
 import com.allure.http.ApiResponse;
+import com.allure.http.response.album.AlbumVO;
 import com.allure.service.AlbumService;
 import com.allure.utils.SessionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,13 @@ public class AlbumController extends AbstractBaseController {
         return new ApiResponse.Builder().success().result(albumService.list(pageable, tagId)).build();
     }
 
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @PermitAll
+    public ApiResponse get(@PathVariable("id") long id) {
+        AlbumVO albumVO = albumService.findById(id);
+        return new ApiResponse.Builder().success().result(albumVO).build();
+    }
+
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @PreAuthorize(value = "hasRole('ROLE_ADMIN')")
     public ApiResponse delete(@PathVariable("id") long id) {
@@ -47,7 +55,7 @@ public class AlbumController extends AbstractBaseController {
     }
 
     @RequestMapping(value = "/{id}/liked", method = RequestMethod.GET)
-    @PreAuthorize(value = "hasRole('ROLE_USER')")
+    @PermitAll
     public ApiResponse liked(@PathVariable("id") long id) {
         return new ApiResponse.Builder().success().result(albumService.liked(getAccountId(), id)).build();
     }
@@ -60,7 +68,7 @@ public class AlbumController extends AbstractBaseController {
     }
 
     @RequestMapping(value = "/{id}/collected", method = RequestMethod.GET)
-    @PreAuthorize(value = "hasRole('ROLE_USER')")
+    @PermitAll
     public ApiResponse collected(@PathVariable("id") long id) {
         return new ApiResponse.Builder().success().result(albumService.collected(getAccountId(), id)).build();
     }

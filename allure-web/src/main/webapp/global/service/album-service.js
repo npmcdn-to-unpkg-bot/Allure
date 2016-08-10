@@ -24,6 +24,18 @@
             };
 
             /**
+             * 获取相册信息
+             * @param id 相册ID
+             * @returns {{promise, success, error}|*}
+             */
+            this.get = function (id) {
+                return HttpService.http({
+                    url: ConfigService.allureServer + '/albums/' + id,
+                    method: 'GET'
+                });
+            };
+
+            /**
              * 删除相册
              * @param id
              * @returns {{promise, success, error}|*}

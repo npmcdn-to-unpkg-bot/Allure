@@ -2,7 +2,7 @@
  * Created by Administrator on 8/9/2016.
  */
 (function () {
-    angular.module('app', ['global']);
+    angular.module('app', ['global', 'ui.bootstrap']);
     angular.module("app").run(['$rootScope', '$state', '$stateParams', '$window',
         function ($rootScope, $state, $stateParams, $window) {
             $rootScope.$state = $state;
@@ -14,23 +14,6 @@
     ]);
     angular.module('app').config(function (cfpLoadingBarProvider) {
         cfpLoadingBarProvider.includeSpinner = true;
-    });
-    angular.module("app").config(function (toastrConfig) {
-        angular.extend(toastrConfig, {
-            autoDismiss: true,
-            allowHtml: false,
-            closeButton: true,
-            progressBar: false,
-            tapToDismiss: false,
-            containerId: 'toast-container',
-            maxOpened: 0,
-            newestOnTop: true,
-            positionClass: 'toast-top-right',
-            preventDuplicates: false,
-            preventOpenDuplicates: false,
-            target: 'body',
-            timeOut: 2000
-        });
     });
 
     angular.module("app").config(function ($stateProvider, $urlRouterProvider) {
@@ -47,6 +30,16 @@
             resolve: {
                 tags: function (TagService) {
                     return TagService.getTags().promise;
+                }
+            },
+            title: '首页'
+        }).state('albums.detail', {
+            url: '/{id:[0-9]{1,}}',
+            templateUrl: 'albums/detail.html',
+            controller: 'AlbumsDetailController',
+            resolve: {
+                album: function (AlbumService, $stateParams) {
+                    return AlbumService.get($stateParams.id).promise;
                 }
             },
             title: '首页'

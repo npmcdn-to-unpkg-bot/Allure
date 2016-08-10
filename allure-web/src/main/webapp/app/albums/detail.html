@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="container-fluid text-muted">
+                <div class="row">
+                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-4"
+                         style="height: 20px;overflow: hidden;line-height: 20px;">
+                        {{album.name}}
+                    </div>
+                    <div class="col-lg-1 col-md-1 col-sm-2 col-xs-4 text-center">
+                        <span class="pointer" title="收藏数" ng-click="toggleCollect()">
+                            <i class="glyphicon glyphicon-heart" ng-class="{'text-red':collected}"></i> {{album.collectionRecordsCount}}
+                        </span>
+                    </div>
+                    <div class="col-lg-1 col-md-1 col-sm-2 col-xs-4 text-center">
+                         <span class="pointer" title="喜欢数" ng-click="toggleLike()">
+                            <i class="fa fa-thumbs-up" ng-class="{'text-red':liked}"></i> {{album.likeRecordsCount}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div ng-repeat="photo in album.photos" class="text-center" style="margin:0px 0px 15px 0px;">
+                <img ng-src="{{photo.src}}">
+            </div>
+        </div>
+    </div>
+</div>
