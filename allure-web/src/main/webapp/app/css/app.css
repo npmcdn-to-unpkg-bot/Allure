@@ -67,12 +67,12 @@ body {
 }
 
 .album-item-container {
-    padding: 8px;
-    border: 1px solid #edeff2;
+    padding: 10px;
+    border: 1px solid #777;
     color: #777;
     font-size: 11px;
     margin: 10px 5px 5px 5px;
-    border-radius: 8px;
+    border-radius: 10px;
 }
 
 .album-item-container img {

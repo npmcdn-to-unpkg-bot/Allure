@@ -3,3 +3,4 @@ allure-service/target/
 *.iml
 allure-web/target/
 logs/
+/allure-image/target/
