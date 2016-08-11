@@ -1,9 +1,7 @@
-package com.allure.utils;
+package com.allure.common.utils;
 
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 
-import java.security.MessageDigest;
-import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,15 +9,6 @@ import java.util.regex.Pattern;
  * Created by yang_shoulai on 2015/10/12.
  */
 public class StringUtils {
-
-    private static final char[] hexDigits = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
-
-    private static String[] chars = new String[]{"a", "b", "c", "d", "e", "f",
-            "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s",
-            "t", "u", "v", "w", "x", "y", "z", "0", "1", "2", "3", "4", "5",
-            "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G", "H", "I",
-            "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V",
-            "W", "X", "Y", "Z"};
 
     public static boolean isEmpty(String str) {
         return str == null || str.trim().isEmpty();

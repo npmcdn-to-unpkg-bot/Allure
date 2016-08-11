@@ -1,5 +1,6 @@
 package com.allure.service.impl;
 
+import com.allure.common.utils.StringUtils;
 import com.allure.domain.model.Account;
 import com.allure.domain.model.Role;
 import com.allure.domain.repository.AccountRepository;
@@ -9,15 +10,11 @@ import com.allure.http.request.account.LoginRequest;
 import com.allure.http.request.account.RegisterRequest;
 import com.allure.http.request.account.UpdateRequest;
 import com.allure.service.AccountService;
-import com.allure.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Locale;
 import java.util.Set;
 
 /**

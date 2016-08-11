@@ -4,3 +4,4 @@ allure-service/target/
 allure-web/target/
 logs/
 /allure-image/target/
+/allure-common/target/
