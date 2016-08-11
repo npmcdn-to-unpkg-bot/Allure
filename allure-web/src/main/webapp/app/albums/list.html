@@ -5,22 +5,25 @@
         </li>
     </ul>
     <ul class="list-inline  text-center">
-        <li class="col-lg-2 col-md-4 col-sm-6 col-xs-12" ng-repeat="album in albums">
+        <li class="col-lg-3 col-md-4 col-sm-6 col-xs-12" ng-repeat="album in albums">
             <div class="album-item-container">
-                <a ng-href="#albums/{{album.id}}" target="_blank"><img ng-src="{{album.photos[0].src}}?width=240&height=320"></a>
+                <a ng-href="#albums/{{album.id}}" target="_blank"><img
+                        ng-src="{{album.photos[0].src}}?width=480&height=480"></a>
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-lg-7 col-md-8 col-sm-8 col-xs-9 text-left" style="padding-left: 0px;">
+                        <div class="col-lg-6 col-md-8 col-sm-8 col-xs-6 text-left" style="padding-left: 0px;">
                             <span class="text-muted album-label">{{album.name}}</span>
                         </div>
-                        <div class="col-lg-5 col-md-4 col-sm-4 col-xs-3 text-right album-label"
+                        <div class="col-lg-3 col-md-2 col-sm-2 col-xs-3 album-label text-right"
                              style="padding-left: 0px;padding-right: 0px;">
                              <span title="收藏数">
-                                <i class="glyphicon glyphicon-heart">{{album.collectionRecordsCount}}</i>
+                                <i class="glyphicon glyphicon-heart"> {{album.collectionRecordsCount}}</i>
                             </span>
-                            &nbsp;
-                             <span title="喜欢数">
-                                <i class="glyphicon glyphicon-thumbs-up">{{album.likeRecordsCount}}</i>
+                        </div>
+                        <div class="col-lg-3 col-md-2 col-sm-2 col-xs-3 album-label text-right"
+                             style="padding-left: 0px;padding-right: 0px;">
+                            <span title="喜欢数">
+                                <i class="glyphicon glyphicon-thumbs-up"> {{album.likeRecordsCount}}</i>
                             </span>
                         </div>
                     </div>
