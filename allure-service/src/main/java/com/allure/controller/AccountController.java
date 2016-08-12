@@ -1,5 +1,6 @@
 package com.allure.controller;
 
+import com.allure.common.utils.VerifyCodeUtils;
 import com.allure.domain.model.Account;
 import com.allure.domain.model.Role;
 import com.allure.http.ApiResponse;
@@ -7,6 +8,7 @@ import com.allure.http.request.account.RegisterRequest;
 import com.allure.http.request.account.UpdateRequest;
 import com.allure.http.response.account.LoginResponse;
 import com.allure.service.AccountService;
+import com.allure.utils.SessionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -39,10 +42,13 @@ public class AccountController extends AbstractBaseController {
         if (bindingResult.hasErrors()) {
             return fromBindingResult(bindingResult);
         }
+        String verifyCode = (String) SessionUtils.getAttribute(request, SessionUtils.KEY_VERIFY_CODE);
+        if (!registerRequest.getValidationCode().equalsIgnoreCase(verifyCode)) {
+            return new ApiResponse.Builder().exception().globalError(null, "验证码不正确").build();
+        }
         accountService.register(registerRequest);
         return new ApiResponse.Builder().success().build();
     }
-
 
 
     @RequestMapping(value = "/reload", method = RequestMethod.GET)
@@ -72,6 +78,15 @@ public class AccountController extends AbstractBaseController {
         }
         accountService.update(id, updateRequest);
         return new ApiResponse.Builder().success().build();
+    }
+
+    @RequestMapping(value = "/verifyCode", method = RequestMethod.GET)
+    @PermitAll
+    public ApiResponse verifyCode(HttpServletRequest request) throws IOException {
+        String code = VerifyCodeUtils.generateVerifyCode(4);
+        String base64 = VerifyCodeUtils.outputVerifyImageAsBase64(200, 80, code);
+        SessionUtils.setAttribute(request, SessionUtils.KEY_VERIFY_CODE, code);
+        return new ApiResponse.Builder().success().result(base64).build();
     }
 
 }

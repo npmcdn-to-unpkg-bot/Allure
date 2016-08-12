@@ -64,6 +64,23 @@
                     }
                 };
             };
+
+            this.parseErrors = function (apiErrors) {
+                var messages = '';
+                if (apiErrors) {
+                    if (apiErrors.globalErrors) {
+                        angular.forEach(apiErrors.globalErrors, function (error) {
+                            messages = messages + error.message + '\n';
+                        });
+                    }
+                    if (apiErrors.filedErrors) {
+                        angular.forEach(apiErrors.filedErrors, function (error) {
+                            messages = messages + error.message + '\n';
+                        });
+                    }
+                }
+                return messages;
+            }
         }]);
 
 })();

@@ -1,15 +1,15 @@
 package com.allure.utils;
 
-import com.allure.config.UserService;
-import com.allure.domain.model.Account;
-import org.springframework.security.core.context.SecurityContextHolder;
-
 import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by Administrator on 8/3/2016.
  */
 public class SessionUtils {
+
+
+    public static final String KEY_VERIFY_CODE = "key_verify_code";
+
 
     /**
      * add attribute in session

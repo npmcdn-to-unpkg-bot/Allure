@@ -1,5 +1,5 @@
-<div class="container-fluid">
-    <ul class="nav nav-pills">
+<div class="container">
+    <ul class="nav nav-pills" style="margin-left: 5px;margin-bottom: 10px;">
         <li ng-repeat="tag in tags" role="presentation" ng-class="{'active':tag.id == pagination.tag.id}">
             <a role="button" ng-click="clickTag(tag)">{{tag.name}}</a>
         </li>
@@ -7,24 +7,37 @@
     <ul class="list-inline  text-center">
         <li class="col-lg-3 col-md-4 col-sm-6 col-xs-12" ng-repeat="album in albums">
             <div class="album-item-container">
-                <a ng-href="#albums/{{album.id}}" target="_blank"><img
-                        ng-src="{{album.photos[0].src}}?width=480&height=480"></a>
+                <div style="width:100%; overflow: hidden;">
+                    <a ng-href="#albums/{{album.id}}" target="_blank"><img
+                            ng-src="{{album.photos[0].src}}?width=480&height=480"></a>
+                </div>
                 <div class="container-fluid">
+                    <div class="row album-title">
+                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 text-left">
+                            <span class="text-muted">{{album.name}}</span>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-right">
+                            <span class="text-muted">{{album.photos.length}}P</span>
+                        </div>
+                    </div>
+                    <div style="border-bottom: 1px solid #edeff2;"></div>
                     <div class="row">
-                        <div class="col-lg-6 col-md-8 col-sm-8 col-xs-6 text-left" style="padding-left: 0px;">
-                            <span class="text-muted album-label">{{album.name}}</span>
-                        </div>
-                        <div class="col-lg-3 col-md-2 col-sm-2 col-xs-3 album-label text-right"
-                             style="padding-left: 0px;padding-right: 0px;">
+                        <div class="album-info">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-left">
+                             <span title="更新时间">
+                                <i class="fa fa-clock-o"> {{album.updateDate | date:'yyyy-MM-dd'}}</i>
+                            </span>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-right">
                              <span title="收藏数">
-                                <i class="glyphicon glyphicon-heart"> {{album.collectionRecordsCount}}</i>
+                                <i class="fa fa-star"> {{album.collectionRecordsCount}}</i>
                             </span>
-                        </div>
-                        <div class="col-lg-3 col-md-2 col-sm-2 col-xs-3 album-label text-right"
-                             style="padding-left: 0px;padding-right: 0px;">
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-right">
                             <span title="喜欢数">
-                                <i class="glyphicon glyphicon-thumbs-up"> {{album.likeRecordsCount}}</i>
+                                <i class="fa fa-thumbs-up"> {{album.likeRecordsCount}}</i>
                             </span>
+                            </div>
                         </div>
                     </div>
                 </div>

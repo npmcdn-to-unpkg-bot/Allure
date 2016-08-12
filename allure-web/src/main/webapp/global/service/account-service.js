@@ -38,16 +38,18 @@
              * @param email 邮箱
              * @param password 密码
              * @param nickName 昵称
+             * @param validationCode 验证码
              * @returns {{promise, success, error}|*}
              */
-            this.register = function (email, password, nickName) {
+            this.register = function (email, password, nickName, validationCode) {
                 return HttpService.http({
                     url: ConfigService.allureServer + '/accounts/register',
                     method: 'POST',
                     data: {
                         email: email,
                         password: password,
-                        nickName: nickName
+                        nickName: nickName,
+                        validationCode: validationCode
                     }
                 });
             };
@@ -82,5 +84,17 @@
                     method: 'GET'
                 });
             };
+
+            /**
+             * 获取注册验证码
+             * @returns {{promise, success, error}|*}
+             */
+            this.getVerifyCode = function () {
+                return HttpService.http({
+                    url: ConfigService.allureServer + '/accounts/verifyCode',
+                    method: 'GET'
+                });
+            };
+
         }]);
 })();

@@ -2,17 +2,17 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             <div class="container-fluid text-muted">
-                <div class="row">
-                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-4"
-                         style="height: 20px;overflow: hidden;line-height: 20px;">
+                <div class="row" style="height: 36px;line-height: 36px;overflow: hidden;text-overflow: ellipsis;">
+                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-8"
+                         style="overflow: hidden;font-size: 24px;">
                         {{album.name}}
                     </div>
-                    <div class="col-lg-1 col-md-1 col-sm-2 col-xs-4 text-center">
+                    <div class="col-lg-1 col-md-1 col-sm-2 col-xs-2 text-center">
                         <span class="pointer" title="收藏数" ng-click="toggleCollect()">
-                            <i class="glyphicon glyphicon-heart" ng-class="{'text-red':collected}"></i> {{album.collectionRecordsCount}}
+                            <i class="fa fa-star" ng-class="{'text-red':collected}"></i> {{album.collectionRecordsCount}}
                         </span>
                     </div>
-                    <div class="col-lg-1 col-md-1 col-sm-2 col-xs-4 text-center">
+                    <div class="col-lg-1 col-md-1 col-sm-2 col-xs-2 text-center">
                          <span class="pointer" title="喜欢数" ng-click="toggleLike()">
                             <i class="fa fa-thumbs-up" ng-class="{'text-red':liked}"></i> {{album.likeRecordsCount}}
                         </span>
@@ -21,8 +21,20 @@
             </div>
         </div>
         <div class="panel-body">
-            <div ng-repeat="photo in album.photos" class="text-center" style="margin:0px 0px 15px 0px;">
-                <img ng-src="{{photo.src}}">
+            <div ng-repeat="photo in album.photos" style="margin:0px 0px 15px 0px;">
+                <img ng-src="{{photo.src}}" style="max-width: 100%;height: auto;">
+            </div>
+            <div>
+                <h3 class="album-tags-label">
+                        <span>
+                            <i class="fa fa-tags"></i> Tags
+                        </span>
+                </h3>
+                <ul class="list-inline">
+                    <li ng-repeat="tag in album.tags">
+                        <span class="label label-default">{{tag.name}}</span>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>

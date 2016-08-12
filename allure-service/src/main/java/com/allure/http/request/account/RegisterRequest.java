@@ -27,6 +27,10 @@ public class RegisterRequest {
     @Length(min = 1, max = 20, message = "{account.register.nickName.length}")
     private String nickName;
 
+    @NotNull(message = "{account.register.validationCode.notNull}")
+    @NotBlank(message = "{account.register.validationCode.notNull}")
+    private String validationCode;
+
     public String getEmail() {
         return email;
     }
@@ -49,5 +53,13 @@ public class RegisterRequest {
 
     public void setNickName(String nickName) {
         this.nickName = nickName;
+    }
+
+    public String getValidationCode() {
+        return validationCode;
+    }
+
+    public void setValidationCode(String validationCode) {
+        this.validationCode = validationCode;
     }
 }
