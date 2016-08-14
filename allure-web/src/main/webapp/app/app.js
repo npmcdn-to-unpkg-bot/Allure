@@ -2,7 +2,7 @@
  * Created by Administrator on 8/9/2016.
  */
 (function () {
-    angular.module('app', ['global', 'ui.bootstrap']);
+    angular.module('app', ['global', 'ui.bootstrap','textAngular','angularTrix']);
     angular.module("app").run(['$rootScope', '$state', '$stateParams', '$window',
         function ($rootScope, $state, $stateParams, $window) {
             $rootScope.$state = $state;
@@ -43,6 +43,19 @@
                 }
             },
             title: '首页'
+        }).state('articles', {
+            url: '/articles',
+            templateUrl: 'articles/articles.html',
+            abstract: true
+        }).state('articles.list', {
+            url: '/list',
+            templateUrl: 'articles/list.html',
+            title: '文章'
+        }).state('articles.add', {
+            url: '/add',
+            templateUrl: 'articles/add.html',
+            controller:'ArticleAddController',
+            title: '文章'
         });
 
     });

@@ -4,8 +4,8 @@
 
 (function () {
     angular.module('app').controller('AlbumsListController', [
-        '$scope', 'tags', 'AlbumService', 'MessageService', '$state',
-        function ($scope, tags, AlbumService, MessageService, $state) {
+        '$scope', 'tags', 'AlbumService', 'MessageService', '$state', '$window',
+        function ($scope, tags, AlbumService, MessageService, $state, $window) {
             $scope.tags = tags;
             $scope.albums = [];
             $scope.pagination = {
@@ -20,9 +20,7 @@
                     .success(function (page) {
                         $scope.pagination.maxSize = page.totalElements;
                         $scope.albums = page.content;
-                        /*angular.forEach($scope.albums, function (album) {
-                            album.photos[0].src = 'http://tnfs.tngou.net/image/ext/160803/1c80ec19164a9ccfded52af97703cdb7.jpg';
-                        });*/
+                        $window.scrollTo(0, 0);
 
                     }).error(function (globalErrors, fieldErrors) {
                     MessageService.toast.error('获取相册列表失败');
@@ -50,8 +48,8 @@
             $scope.album = album;
 
             /*angular.forEach(album.photos, function (photo) {
-                photo.src = 'http://tnfs.tngou.net/image/ext/160803/1c80ec19164a9ccfded52af97703cdb7.jpg';
-            });*/
+             photo.src = 'http://tnfs.tngou.net/image/ext/160803/1c80ec19164a9ccfded52af97703cdb7.jpg';
+             });*/
 
             $state.current.title = album.name;
             $scope.liked = false;
