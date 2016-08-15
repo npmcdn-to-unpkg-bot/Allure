@@ -34,6 +34,18 @@
                         plain: false,
                         controller: ['$scope', function ($scope) {
                             $scope.link = 'http://';
+                            $scope.error = '';
+                            $scope.uploadFile = function ($files) {
+                                $scope.error = '';
+                                if ($files && $files.length && $files.length > 0) {
+                                    if ($files[0].size > 1024 * 1024 * 5) {
+                                        $scope.error = '文件大小超过5MB';
+                                        return;
+                                    } else {
+
+                                    }
+                                }
+                            };
                         }],
                         width: '40%',
                         height: '60%',

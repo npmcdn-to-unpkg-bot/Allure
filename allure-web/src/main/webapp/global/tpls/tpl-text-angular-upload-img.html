@@ -1,9 +1,14 @@
 <div>
     <uib-tabset>
         <uib-tab heading="本地上传">
-            <div class="form-group" style="margin-top: 15px;height: 200px;">
-                <div ngf-drop ng-model="files" class="drop-box">支持图片拖拽上传</div>
-            </div>
+            <form name="uploadForm">
+                <div class="form-group" style="margin-top: 15px;height: 200px;">
+                    <div class="drop-box" ngf-multiple="false"
+                         ngf-pattern="'image/*'" ngf-drop="uploadFile($files)" ngf-select="uploadFile($files)">支持图片拖拽上传
+                    </div>
+                    <p class="text-danger text-center">{{error}}</p>
+                </div>
+            </form>
         </uib-tab>
         <uib-tab heading="网络图片">
             <div class="form-group" style="margin-top: 15px;height: 200px;">
