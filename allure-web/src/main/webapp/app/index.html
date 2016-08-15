@@ -12,7 +12,10 @@
     <link rel="stylesheet" href="lib/angular-toastr/dist/angular-toastr.min.css">
     <link rel="stylesheet" href="lib/angular-ui-select/dist/select.min.css">
     <link rel='stylesheet' href='lib/textAngular/dist/textAngular.css'>
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/trix/0.9.2/trix.css">
+    <link rel="stylesheet" href="lib/trix/dist/trix.css">
+    <link rel="stylesheet" href="lib/angular-scroll-to-top/build/scrollToTop.min.css">
+    <link rel="stylesheet" href="lib/ng-dialog/css/ngDialog.min.css">
+    <link rel="stylesheet" href="lib/ng-dialog/css/ngDialog-theme-default.min.css">
     <link rel="stylesheet" href="css/app.css">
 
     <script src="lib/jquery/dist/jquery.min.js"></script>
@@ -28,9 +31,14 @@
     <script src="lib/angular-ui-select/dist/select.min.js"></script>
     <script src='lib/textAngular/dist/textAngular-rangy.min.js'></script>
     <script src='lib/textAngular/dist/textAngular-sanitize.min.js'></script>
-    <script src='lib/textAngular/dist/textAngular.min.js'></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/0.9.2/trix.js"></script>
+    <script src='lib/textAngular/dist/textAngular.js'></script>
+    <script src='lib/textAngular/dist/textAngularSetup.js'></script>
+    <script src="lib/trix/dist/trix.js"></script>
     <script src="lib/angular-trix/dist/angular-trix.min.js"></script>
+    <script src="lib/angular-scroll-to-top/build/scrollToTop.js"></script>
+    <script src="lib/ng-dialog/js/ngDialog.min.js"></script>
+    <script src="lib/ng-file-upload-shim/ng-file-upload-shim.min.js"></script>
+    <script src="lib/ng-file-upload-shim/ng-file-upload.min.js"></script>
     <script src="../global/global.js"></script>
     <script src="../global/service/config-service.js"></script>
     <script src="../global/service/http-service.js"></script>
@@ -62,7 +70,8 @@
                 <ul class="nav navbar-nav">
                     <li ui-sref-active="active" ng-class="{active: $state.includes('albums')}"><a ui-sref="albums.list">美女图片</a>
                     </li>
-                    <li ui-sref-active="active" ng-class="{active: $state.includes('articles')}"><a ui-sref="articles.add">文章</a>
+                    <li ui-sref-active="active" ng-class="{active: $state.includes('articles')}"><a
+                            ui-sref="articles.add">文章</a>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -94,6 +103,9 @@
         </div>
     </nav>
     <div ui-view></div>
+    <a href="#" scrolltotop class="scrollToTop" title="返回顶部">
+        <i class="fa fa-4x fa-chevron-circle-up"></i>
+    </a>
     <footer class="footer">
         <div class="container text-center">
             <p>Designed and built by <a href="#">@mdo</a> and <a href="#">@fat</a>.</p>

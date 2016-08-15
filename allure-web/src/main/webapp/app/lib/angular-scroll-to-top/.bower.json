@@ -1,0 +1,26 @@
+{
+  "name": "angular-scroll-to-top",
+  "main": [
+    "build/scrollToTop.js",
+    "build/scrollToTop.css"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components",
+    "test",
+    "example"
+  ],
+  "homepage": "https://github.com/ediri/hover-scroll-to-top",
+  "version": "0.1.1",
+  "_release": "0.1.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.1.1",
+    "commit": "ababd7ef04791c9d6bd10b3082027bdc2e72359b"
+  },
+  "_source": "https://github.com/ediri/hover-scroll-to-top.git",
+  "_target": "^0.1.1",
+  "_originalSource": "hover-scroll-to-top",
+  "_direct": true
+}

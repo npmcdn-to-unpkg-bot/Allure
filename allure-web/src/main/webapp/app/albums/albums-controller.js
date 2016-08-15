@@ -10,7 +10,7 @@
             $scope.albums = [];
             $scope.pagination = {
                 page: 1,
-                pageSize: 24,
+                pageSize: 48,
                 tag: null,
                 maxSize: 0
             };

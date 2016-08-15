@@ -1,0 +1,20 @@
+<div>
+    <uib-tabset>
+        <uib-tab heading="本地上传">
+            <div class="form-group" style="margin-top: 15px;height: 200px;">
+                <div ngf-drop ng-model="files" class="drop-box">支持图片拖拽上传</div>
+            </div>
+        </uib-tab>
+        <uib-tab heading="网络图片">
+            <div class="form-group" style="margin-top: 15px;height: 200px;">
+                <input class="form-control" type="text" ng-model="link"/>
+            </div>
+        </uib-tab>
+    </uib-tabset>
+    <div class="row">
+        <div class="text-right col-md-12">
+            <button class="btn btn-warning" style="margin-right: 10px;" ng-click="closeThisDialog()">取消</button>
+            <button class="btn btn-primary" ng-click="closeThisDialog(link)">确定</button>
+        </div>
+    </div>
+</div>

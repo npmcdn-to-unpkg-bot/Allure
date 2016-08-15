@@ -2,7 +2,7 @@
  * Created by Administrator on 8/9/2016.
  */
 (function () {
-    angular.module('app', ['global', 'ui.bootstrap','textAngular','angularTrix']);
+    angular.module('app', ['global']);
     angular.module("app").run(['$rootScope', '$state', '$stateParams', '$window',
         function ($rootScope, $state, $stateParams, $window) {
             $rootScope.$state = $state;
@@ -54,7 +54,7 @@
         }).state('articles.add', {
             url: '/add',
             templateUrl: 'articles/add.html',
-            controller:'ArticleAddController',
+            controller: 'ArticleAddController',
             title: '文章'
         });
 

@@ -796,7 +796,7 @@ angular.module('textAngularSetup', [])
 
 				if (urlPrompt && urlPrompt !== '' && urlPrompt !== 'https://') {
 
-					videoId = taToolFunctions.extractYoutubeVideoId(urlPrompt);
+					var videoId = taToolFunctions.extractYoutubeVideoId(urlPrompt);
 
 					/* istanbul ignore else: if it's invalid don't worry - though probably should show some kind of error message */
 					if (videoId) {
