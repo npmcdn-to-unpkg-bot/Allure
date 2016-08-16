@@ -58,6 +58,14 @@
         <url-pattern>/image/*</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>ArticleImageUploadServlet</servlet-name>
+        <servlet-class>com.allure.image.ArticleImageUploadServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ArticleImageUploadServlet</servlet-name>
+        <url-pattern>/articles/image/upload/*</url-pattern>
+    </servlet-mapping>
 
     <!-- Handles Spring requests -->
     <servlet>

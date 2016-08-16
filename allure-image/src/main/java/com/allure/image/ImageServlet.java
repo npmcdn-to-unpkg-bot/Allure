@@ -19,7 +19,7 @@ import java.io.OutputStream;
 /**
  * Created by yang_shoulai on 2016/8/10.
  */
-public class ImageServlet extends HttpServlet {
+public class ImageServlet extends BaseFileServlet {
 
     private static final String ALBUM_REPOSITORY = "D:\\zeal-albums\\";
 
@@ -46,27 +46,5 @@ public class ImageServlet extends HttpServlet {
 
     }
 
-    protected void returnFile(HttpServletResponse response, File file) {
-        if (file.exists() && file.canRead()) {
-            FileInputStream fileInputStream = null;
-            OutputStream stream = null;
-            try {
-                fileInputStream = new FileInputStream(file);
-                byte[] data = new byte[(int) file.length()];
-                int count = fileInputStream.read(data);
-                if (count <= 0) return;
-                MimetypesFileTypeMap mimetypesFileTypeMap = new MimetypesFileTypeMap();
-                String contentType = mimetypesFileTypeMap.getContentType(file);
-                response.setContentType(contentType);
-                stream = response.getOutputStream();
-                stream.write(data);
-                stream.flush();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                StreamUtils.close(fileInputStream);
-                StreamUtils.close(stream);
-            }
-        }
-    }
+
 }

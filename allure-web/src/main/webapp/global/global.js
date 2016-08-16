@@ -19,8 +19,8 @@
 
     //add image upload support for textAngular
     angular.module('global').config(['$provide', function ($provide) {
-        $provide.decorator('taTools', ['$delegate', 'taSelection', '$window', 'taTranslations', 'ngDialog',
-            function (taTools, taSelection, $window, taTranslations, ngDialog) {
+        $provide.decorator('taTools', ['$delegate', 'taSelection', '$window', 'taTranslations', 'ngDialog', 'Upload', 'ConfigService',
+            function (taTools, taSelection, $window, taTranslations, ngDialog, Upload, ConfigService) {
                 taTools.insertImage.action = function () {
                     var textAngular = this;
                     var blockJavascript = function (link) {
@@ -33,19 +33,43 @@
                         template: '../global/tpls/tpl-text-angular-upload-img.html',
                         plain: false,
                         controller: ['$scope', function ($scope) {
-                            $scope.link = 'http://';
+                            $scope.link = '';
                             $scope.error = '';
+                            $scope.uploading = false;
+                            $scope.uploadProgress = 0;
+                            $scope.uploadSuccess = false;
                             $scope.uploadFile = function ($files) {
                                 $scope.error = '';
+                                $scope.uploadProgress = 0;
                                 if ($files && $files.length && $files.length > 0) {
                                     if ($files[0].size > 1024 * 1024 * 5) {
                                         $scope.error = '文件大小超过5MB';
-                                        return;
                                     } else {
-
+                                        $scope.uploading = true;
+                                        Upload.upload({
+                                            url: ConfigService.articlesImageUploadServer,
+                                            data: {file: $files[0]}
+                                        }).then(function (resp) {
+                                            $scope.link = ConfigService.articlesImageUploadServer + resp.data[0];
+                                            $scope.uploading = false;
+                                            $scope.uploadSuccess = true;
+                                        }, function (resp) {
+                                            $scope.error = '图片上传出错';
+                                            $scope.uploading = false;
+                                        }, function (evt) {
+                                            $scope.uploadProgress = parseInt(100.0 * evt.loaded / evt.total);
+                                        });
                                     }
                                 }
                             };
+                            $scope.reset = function () {
+                                $scope.error = '';
+                                $scope.uploading = false;
+                                $scope.uploadProgress = 0;
+                                $scope.uploadSuccess = false;
+                                $scope.link='';
+                            };
+
                         }],
                         width: '40%',
                         height: '60%',
