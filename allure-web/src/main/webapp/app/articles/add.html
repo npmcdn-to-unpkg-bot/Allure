@@ -1,5 +1,21 @@
 <div class="container">
-    <div text-angular ng-model="html" ta-file-drop="onFileDrop"></div>
-    <br/>
-    <div ta-bind ng-model="html"></div>
+    <div class="form-group">
+        <ui-select ng-model="category">
+            <ui-select-match>
+                <span ng-bind="$select.selected.name"></span>
+            </ui-select-match>
+            <ui-select-choices repeat="item in (categories | filter: $select.search) track by item.id">
+                <span ng-bind="item.name"></span>
+            </ui-select-choices>
+        </ui-select>
+    </div>
+    <div class="form-group">
+        <input class="form-control" type="text" ng-model="name" name="name" placeholder="请输入标题" required>
+    </div>
+    <div class="form-group">
+        <div text-angular ng-model="html" ta-file-drop="onFileDrop"></div>
+    </div>
+    <div class="form-group">
+        <button class="btn btn-primary" ng-click="submit()">发表</button>
+    </div>
 </div>

@@ -56,6 +56,16 @@
             templateUrl: 'articles/add.html',
             controller: 'ArticleAddController',
             title: '文章'
+        }).state('articles.detail', {
+            url: '/{id:[0-9]{1,}}',
+            templateUrl: 'articles/detail.html',
+            controller: 'ArticleDetailController',
+            resolve: {
+                article: function (ArticleService, $stateParams) {
+                    return ArticleService.findById($stateParams.id).promise;
+                }
+            },
+            title: '文章'
         });
 
     });

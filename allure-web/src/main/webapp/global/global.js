@@ -19,21 +19,25 @@
 
     //add image upload support for textAngular
     angular.module('global').config(['$provide', function ($provide) {
-        $provide.decorator('taTools', ['$delegate', 'taSelection', '$window', 'taTranslations', 'ngDialog', 'Upload', 'ConfigService',
-            function (taTools, taSelection, $window, taTranslations, ngDialog, Upload, ConfigService) {
-                taTools.insertImage.action = function () {
+        $provide.decorator('taTools', ['$delegate', 'taSelection', '$window', 'taTranslations', 'ngDialog', 'Upload', 'ConfigService', '$document',
+            function (taTools, taSelection, $window, taTranslations, ngDialog, Upload, ConfigService, $document) {
+                taTools.insertImage.action = function ($deferred) {
                     var textAngular = this;
+                    var savedSelection = rangy.saveSelection();
                     var blockJavascript = function (link) {
                         if (link.toLowerCase().indexOf('javascript') !== -1) {
                             return true;
                         }
                         return false;
                     };
-                    ngDialog.open({
+                    var dialog = ngDialog.open({
                         template: '../global/tpls/tpl-text-angular-upload-img.html',
                         plain: false,
+                        closeByDocument: false,
+                        closeByEscape: false,
                         controller: ['$scope', function ($scope) {
-                            $scope.link = '';
+                            $scope.image = {};
+                            $scope.image.link = '';
                             $scope.error = '';
                             $scope.uploading = false;
                             $scope.uploadProgress = 0;
@@ -50,7 +54,7 @@
                                             url: ConfigService.articlesImageUploadServer,
                                             data: {file: $files[0]}
                                         }).then(function (resp) {
-                                            $scope.link = ConfigService.articlesImageUploadServer + resp.data[0];
+                                            $scope.image.link = ConfigService.articlesImageUploadServer + resp.data[0];
                                             $scope.uploading = false;
                                             $scope.uploadSuccess = true;
                                         }, function (resp) {
@@ -67,14 +71,15 @@
                                 $scope.uploading = false;
                                 $scope.uploadProgress = 0;
                                 $scope.uploadSuccess = false;
-                                $scope.link='';
+                                $scope.image.link = '';
                             };
 
                         }],
                         width: '40%',
                         height: '60%',
                         className: 'ngdialog-theme-default'
-                    }).closePromise.then(function (data) {
+                    });
+                    dialog.closePromise.then(function (data) {
                         // imageLink = $window.prompt(taTranslations.insertImage.dialogPrompt, 'http://');
                         var imageLink = data.value;
                         if (imageLink && imageLink !== '' && imageLink !== 'http://' && 'http://' === imageLink.substring(0, 7)) {
@@ -96,6 +101,7 @@
                                 // So now we use insertHTML here and all is fine.
                                 // NOTE: this is what 'insertImage' is supposed to do anyway!
                                 var embed = '<img src="' + imageLink + '">';
+                                rangy.restoreSelection(savedSelection);
                                 return textAngular.$editor().wrapSelection('insertHTML', embed, true);
                             }
                         }
